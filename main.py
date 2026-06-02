@@ -42,4 +42,14 @@ app.add_handler(CommandHandler("add", add))
 app.add_handler(CommandHandler("history", history))
 app.add_handler(CommandHandler("scan", scan))
 
-app.run_polling()
+import asyncio
+
+async def main():
+    await app.initialize()
+    await app.start()
+    await app.updater.start_polling()
+
+    await asyncio.Event().wait()
+
+if __name__ == "__main__":
+    asyncio.run(main())
