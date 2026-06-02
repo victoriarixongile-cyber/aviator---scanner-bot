@@ -17,8 +17,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def add(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         value = float(context.args[0])
-        results.append(value)
+
+        with open("results.txt", "a") as f:
+            f.write(f"{value}\n")
+
         await update.message.reply_text(f"Saved: {value}x")
+
     except:
         await update.message.reply_text("Usage: /add 1.25")
 
@@ -36,7 +40,7 @@ async def scan(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Custom signal generated."
     )
 
-import os
+
 
 TOKEN = os.getenv("BOT_TOKEN")
 
