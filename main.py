@@ -34,7 +34,11 @@ async def scan(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Custom signal generated."
     )
 
+import os
+
 TOKEN = os.getenv("BOT_TOKEN")
+
+print("TOKEN VALUE:", TOKEN)
 
 print("TOKEN LOADED:", TOKEN is not None)
 app = Application.builder().token(TOKEN).build()
