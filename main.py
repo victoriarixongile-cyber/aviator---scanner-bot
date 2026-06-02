@@ -35,6 +35,8 @@ async def scan(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 TOKEN = os.getenv("BOT_TOKEN")
+
+print("TOKEN LOADED:", TOKEN is not None)
 app = Application.builder().token(TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
