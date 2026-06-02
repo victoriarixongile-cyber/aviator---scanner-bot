@@ -33,8 +33,7 @@ async def scan(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Custom signal generated."
     )
 
-TOKEN = "8813627411:AAH894hlNZ5vziY8cLbSndL6wQspdvqlP10" 
-
+TOKEN = os.getenv("BOT_TOKEN")
 app = Application.builder().token(TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
