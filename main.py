@@ -27,12 +27,21 @@ async def add(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Usage: /add 1.25")
 
 async def history(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not results:
-        await update.message.reply_text("No results saved.")
-        return
+    try:
+        with open("results.txt", "r") as f:
+            lines = f.readlines()
 
-    text = "\n".join(f"{x}x" for x in results[-10:])
-    await update.message.reply_text(text)
+        if not lines:
+            await update.message.reply_text("No results saved.")
+            return
+
+        text = "\n".join(line.strip() + "x" for line in lines[-10:])
+        await update.message.reply_text(text)
+
+    except FileNotFoundError:
+        await update.message.reply_text("No results saved.")
+
+    
 
 async def scan(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
